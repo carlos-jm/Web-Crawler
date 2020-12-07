@@ -56,7 +56,12 @@
    			<artifactId>spring-boot-starter-tomcat</artifactId>
    			<scope>provided</scope>
 		</dependency>
-		
+
+		<dependency>
+			<groupId>nz.net.ultraq.thymeleaf</groupId>
+			<artifactId>thymeleaf-layout-dialect</artifactId>
+		</dependency>
+
 	</dependencies>
 
 	<build>
