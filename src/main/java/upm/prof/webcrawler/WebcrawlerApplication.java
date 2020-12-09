@@ -6,9 +6,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 
 @SpringBootApplication
 public class WebcrawlerApplication extends SpringBootServletInitializer {
-
-	public static void main(String[] args) {
-		SpringApplication.run(WebcrawlerApplication.class, args);
-	}
-
+    public static void main(String[] args) {
+        SpringApplication.run(WebcrawlerApplication.class, args);
+    }
 }

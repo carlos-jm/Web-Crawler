@@ -8,13 +8,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Controller
-@RequestMapping(value = "webcrawler/view")
+@RequestMapping(value = "/")
 public class ViewController {
 
-	@RequestMapping(value = "", method = RequestMethod.GET)
-	@ResponseStatus(HttpStatus.OK)
-	public String view(Model model) {
-		return "index";
-	}
-	
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public String home(Model model) {
+        return "index";
+    }
+
+
+    @RequestMapping(value = "/queries", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public String queries(Model model) {
+        return "queries";
+    }
+
 }

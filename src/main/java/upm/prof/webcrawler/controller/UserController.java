@@ -16,7 +16,7 @@ import upm.prof.webcrawler.exceptions.BadRequestException;
 import upm.prof.webcrawler.service.UserService;
 
 @RestController
-@RequestMapping(value = "webcrawler/users")
+@RequestMapping(value = "/users")
 public class UserController {
 
 	@Autowired
