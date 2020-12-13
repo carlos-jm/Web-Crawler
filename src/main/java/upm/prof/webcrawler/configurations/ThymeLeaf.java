@@ -1,4 +1,6 @@
-package org.igorski.example.configurations;
+package upm.prof.webcrawler.configurations;
+
+// package org.igorski.example.configurations;
 
 import nz.net.ultraq.thymeleaf.LayoutDialect;
 import org.springframework.context.annotation.Bean;
