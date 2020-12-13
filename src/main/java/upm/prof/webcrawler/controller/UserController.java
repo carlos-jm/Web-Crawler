@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import upm.prof.webcrawler.entity.User;
+import upm.prof.webcrawler.exceptions.AlreadyExistsException;
 import upm.prof.webcrawler.exceptions.BadRequestException;
 import upm.prof.webcrawler.service.UserService;
 
@@ -36,7 +37,7 @@ public class UserController {
 	
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.OK)
-	public User createUser(@RequestBody User user) throws BadRequestException {
+	public User createUser(@RequestBody User user) throws BadRequestException, AlreadyExistsException {
 		return userService.saveUser(user);
 	}
 	

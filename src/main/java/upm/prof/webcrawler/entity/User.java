@@ -10,7 +10,7 @@ public class User {
 
 	@Id
 	private int id;
-	private String userName;
+	private String user_name;
 	private String password;
 	
 	
@@ -19,10 +19,10 @@ public class User {
 	}
 
 
-	public User(int id, String userName, String password) {
+	public User(int id, String user_name, String password) {
 		super();
 		this.id = id;
-		this.userName = userName;
+		this.user_name = user_name;
 		this.password = password;
 	}
 
@@ -36,12 +36,12 @@ public class User {
 	}
 
 	public String getUserName() {
-		return userName;
+		return user_name;
 	}
 
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUserName(String user_name) {
+		this.user_name = user_name;
 	}
 
 
