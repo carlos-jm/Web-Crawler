@@ -13,25 +13,32 @@
             <th>Tipo</th>
             <th>Categoría</th>
             <th>Última Actualización</th>
-            <th>Consultas / Mes</th>
+            <!-- <th>Consultas / Mes</th> -->
             <th>Acciones</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
+        
+        
+		<tr th:each="website : ${websiteList}">
             <td><input type="checkbox"></td>
-            <td>https://www.google.com</td>
-            <td>Buscador</td>
-            <td>General</td>
-            <td>2020/11/30</td>
-            <td>5</td>
+            <td th:text="${website.url}"></td>
+            <td th:text="${website.type.getName}"></td>
+            <td th:text="${website.category.getName}"></td>
+            <td th:text="${website.last_update}"></td>
+            <!-- <td th:text="${website.last_update}"></td> -->
             <td>
                 <div class="btn-group" role="group" aria-label="Basic example">
                     <button type="button" class="btn btn-primary">Ver</button>
                     <button type="button" class="btn btn-danger">Eliminar</button>
                 </div>
             </td>
+            
         </tr>
+        
+        
+        
+        
         </tbody>
     </table>
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#filtros">Filtros</button>
