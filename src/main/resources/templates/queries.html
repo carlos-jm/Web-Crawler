@@ -18,9 +18,9 @@
         </tr>
         </thead>
         <tbody>
-        
-        
-		<tr th:each="website : ${websiteList}">
+
+
+        <tr th:each="website : ${websiteList}" th:id="@{'website' + ${website.id}}">
             <td><input type="checkbox"></td>
             <td th:text="${website.url}"></td>
             <td th:text="${website.type.getName}"></td>
@@ -29,16 +29,15 @@
             <!-- <td th:text="${website.last_update}"></td> -->
             <td>
                 <div class="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-primary">Ver</button>
-                    <button type="button" class="btn btn-danger">Eliminar</button>
+                    <button type="button" class="btn btn-primary" th:onClick="@{'viewWebsite(' + ${website.id} + ')'}">
+                        Ver
+                    </button>
+                    <button type="button" class="btn btn-danger" th:onClick="@{'deleteWebsite(' + ${website.id} + ')'}">
+                        Eliminar
+                    </button>
                 </div>
             </td>
-            
         </tr>
-        
-        
-        
-        
         </tbody>
     </table>
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#filtros">Filtros</button>
@@ -62,7 +61,8 @@
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">Seleccionar Categoría</label>
                             <select class="form-control" id="exampleFormControlSelect1">
-                                <option th:each="category : ${categoryList}" th:id="${category.id}" th:text="${category.name}"></option>
+                                <option th:each="category : ${categoryList}" th:id="${category.id}"
+                                        th:text="${category.name}"></option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -89,8 +89,10 @@
     </div>
 </div>
 
-<script layout:fragment="optional">
-    $('#queries').DataTable();
+<script layout:fragment="optional" th:inline="javascript">
+    /*<![CDATA[*/
+
+    var table = $('#queries').DataTable();
     $('#datepicker1').datepicker({
         uiLibrary: 'bootstrap4'
     });
@@ -98,6 +100,20 @@
     $('#datepicker2').datepicker({
         uiLibrary: 'bootstrap4'
     });
+
+
+    function deleteWebsite(id) {
+        var url = /*[[@{/websites}]]*/ "";
+        $.ajax({
+            url: url + "/" + id,
+            type: 'DELETE',
+            success: function (result) {
+                table.row('#website' + id).remove().draw();
+            }
+        });
+    }
+
+    /*]]>*/
 </script>
 </body>
 </html>
