@@ -20,21 +20,27 @@ import upm.prof.webcrawler.service.WebsiteService;
 @RestController
 @RequestMapping(value = "/websites")
 public class WebsiteController {
-	@Autowired
-	private WebsiteService websiteService;
-	
-	@RequestMapping(value = "", method = RequestMethod.GET)
-	@ResponseStatus(HttpStatus.OK)
-	public List<Website> obtenerDemoWebsites() {
-		return websiteService.getAllDemoWebsites();
-	}
-	
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	@ResponseStatus(HttpStatus.OK)
-	public Website createUser(@PathVariable int id) throws BadRequestException, AlreadyExistsException {
-		return websiteService.getWebsiteById(id);
-	
-	}
-	
+    @Autowired
+    private WebsiteService websiteService;
+
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public List<Website> obtenerDemoWebsites() {
+        return websiteService.getAllDemoWebsites();
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public Website getWebsite(@PathVariable int id) throws BadRequestException, AlreadyExistsException {
+        return websiteService.getWebsiteById(id);
+
+    }
+
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteWebsite(@PathVariable int id) throws BadRequestException, AlreadyExistsException {
+        websiteService.removeWebsiteById(id);
+    }
 }
 
