@@ -22,7 +22,7 @@ public class WebsiteServiceTests {
     }
 
     @Test
-    public void addNullClientTest() {
+    public void deleteClientTest() {
         websiteService.removeWebsiteById(1);
         verify(this.websiteRepository).deleteById(1);
     }
