@@ -72,6 +72,16 @@
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.7.7.201606060606</version>
+				<configuration>
+					<excludes>
+						<exclude>upm/prof/webcrawler/configurations/**/*</exclude>
+						<exclude>upm/prof/webcrawler/controller/**/*</exclude>
+						<exclude>upm/prof/webcrawler/entity/**/*</exclude>
+						<exclude>upm/prof/webcrawler/exceptions/**/*</exclude>
+						<exclude>upm/prof/webcrawler/repository/**/*</exclude>
+						<exclude>upm/prof/webcrawler/WebcrawlerApplica*</exclude>
+					</excludes>
+				</configuration>
 				<executions>
 					<execution>
 						<goals>
