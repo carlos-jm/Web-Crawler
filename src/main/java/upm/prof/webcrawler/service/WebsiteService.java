@@ -42,4 +42,9 @@ public class WebsiteService {
 		
 		return websiteRepository.save(website);
 	}
+
+	public void removeWebsiteById(int id) {
+		websiteRepository.deleteById(id);
+	}
+
 }
