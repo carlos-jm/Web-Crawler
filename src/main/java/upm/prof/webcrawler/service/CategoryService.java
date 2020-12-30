@@ -19,7 +19,7 @@ public class CategoryService {
 		return categoryRepository.findAll();
 	}
 
-	public Category getUserById(int id) {
+	public Category getCategoryById(int id) {
 		return categoryRepository.findCategoryById(id);
 	}
 
