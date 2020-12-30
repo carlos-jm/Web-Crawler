@@ -47,7 +47,7 @@ public class ViewController {
     @RequestMapping(value = "/filters", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
     public String getFilterWebsite(Website filtro, Model modelo) throws BadRequestException, AlreadyExistsException {
-    	modelo.addAttribute("websiteList", websiteService.getFilterWebsite(filtro.getUrl(), filtro.getCategory().getId(), filtro.getType().getId()));
+    	modelo.addAttribute("websiteList", websiteService.getFilterWebsite(filtro.getUrl(), 1, 1));
     	modelo.addAttribute("categoryList", categoryService.getAllCategories());
     	modelo.addAttribute("typeList", typeService.getAllTypes());
     	modelo.addAttribute("filtro", new Website());
