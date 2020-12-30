@@ -5,7 +5,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import upm.prof.webcrawler.repository.WebsiteRepository;
-
+import upm.prof.webcrawler.entity.Category;
+import upm.prof.webcrawler.entity.Type;
 import upm.prof.webcrawler.entity.Website;
 import upm.prof.webcrawler.exceptions.AlreadyExistsException;
 import upm.prof.webcrawler.exceptions.BadRequestException;
@@ -16,8 +17,14 @@ public class WebsiteService {
 	@Autowired
 	public WebsiteRepository websiteRepository;
 	
+	@Autowired
+	private TypeService typeService;
+	@Autowired
+	private CategoryService categoryService;
+	
 	public List<Website> getAllDemoWebsites()
 	{
+
 		return websiteRepository.findAll();
 	}
 	
@@ -41,5 +48,16 @@ public class WebsiteService {
 		}
 		
 		return websiteRepository.save(website);
+	}
+	
+	public void removeWebsiteById(int id) {
+		websiteRepository.deleteById(id);
+	}
+	
+	public List<Website> getFilterWebsite(String url, int cat_id, int type_id)
+	{
+		
+		return websiteRepository.filterWebsite("%"+url+"%", categoryService.getCategoryById(cat_id) , typeService.getTypeById(type_id));
+		
 	}
 }

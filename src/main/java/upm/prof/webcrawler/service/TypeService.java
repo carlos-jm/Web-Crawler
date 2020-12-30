@@ -16,7 +16,7 @@ public class TypeService {
 	@Autowired
 	public TypeRepository typeRepository;
 	
-	public List<Type> getAllDemoType(){
+	public List<Type> getAllTypes(){
 		return typeRepository.findAll();
 	}
 	

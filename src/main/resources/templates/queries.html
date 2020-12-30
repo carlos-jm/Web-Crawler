@@ -18,9 +18,9 @@
         </tr>
         </thead>
         <tbody>
-        
-        
-		<tr th:each="website : ${websiteList}">
+
+
+        <tr th:each="website : ${websiteList}" th:id="@{'website' + ${website.id}}">
             <td><input type="checkbox"></td>
             <td th:text="${website.url}"></td>
             <td th:text="${website.type.getName}"></td>
@@ -29,16 +29,15 @@
             <!-- <td th:text="${website.last_update}"></td> -->
             <td>
                 <div class="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-primary">Ver</button>
-                    <button type="button" class="btn btn-danger">Eliminar</button>
+                    <button type="button" class="btn btn-primary" th:onClick="@{'viewWebsite(' + ${website.id} + ')'}">
+                        Ver
+                    </button>
+                    <button type="button" class="btn btn-danger" th:onClick="@{'deleteWebsite(' + ${website.id} + ')'}">
+                        Eliminar
+                    </button>
                 </div>
             </td>
-            
         </tr>
-        
-        
-        
-        
         </tbody>
     </table>
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#filtros">Filtros</button>
@@ -54,27 +53,30 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form action="#" th:action="@{/filters}" th:object="${filtro}" method="post">
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">URL:</label>
-                            <input type="text" class="form-control" id="recipient-name">
+                            <input type="text" class="form-control" id="recipient-name" th:field="*{url}">
                         </div>
+                        
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">Seleccionar Categoría</label>
-                            <select class="form-control" id="exampleFormControlSelect1">
-                                <option>Categoría 1</option>
-                                <option>Categoría 2</option>
-                                <option>Categoría 3</option>
-                                <option>Categoría 4</option>
+                            <select class="form-control selectpicker" id="exampleFormControlSelect1" th.field="*{category}">
+                                <option th:each="category : ${categoryList}" 
+                                		th:id="${category.id}"
+                                        th:text="${category.name}" 
+                                        th:value="${category}"></option>
                             </select>
                         </div>
+                        
                         <div class="form-group">
                             <label for="exampleFormControlSelect2">Seleccionar Tipo</label>
-                            <select class="form-control" id="exampleFormControlSelect2">
-                                <option>Tipo 1</option>
-                                <option>Tipo 2</option>
-                                <option>Tipo 3</option>
-                                <option>Tipo 4</option>
+                            <select class="form-control selectpicker" th.field="*{type}" id="exampleFormControlSelect2">
+                                <option th:each="type : ${typeList}" 
+                                		th:id="${type.id}" 
+                                		th:text="${type.name}" 
+                                		th:value="${type}">
+                                </option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -84,19 +86,22 @@
                                 <input id="datepicker2" placeholder="Hasta" class="form-control w-25"/>
                             </div>
                         </div>
+                        <div class="modal-footer">
+		                  <button type="button" class="btn btn-secondary" data-dismiss="modal" >Cerrar</button>
+		                  <button type="submit" class="btn btn-primary"  > Filtrar </button>
+		             	</div>
                     </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary">Filtrar</button>
-                </div>
+                
             </div>
         </div>
     </div>
 </div>
 
-<script layout:fragment="optional">
-    $('#queries').DataTable();
+<script layout:fragment="optional" th:inline="javascript">
+    /*<![CDATA[*/
+
+    var table = $('#queries').DataTable();
     $('#datepicker1').datepicker({
         uiLibrary: 'bootstrap4'
     });
@@ -104,6 +109,21 @@
     $('#datepicker2').datepicker({
         uiLibrary: 'bootstrap4'
     });
+
+
+    function deleteWebsite(id) {
+        var url = /*[[@{/websites}]]*/ "";
+        $.ajax({
+            url: url + "/" + id,
+            type: 'DELETE',
+            success: function (result) {
+                table.row('#website' + id).remove().draw();
+            }
+        });
+       
+    }
+
+    /*]]>*/
 </script>
 </body>
 </html>
